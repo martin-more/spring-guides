@@ -1,0 +1,162 @@
+# See the top level service
+
+$ curl http://localhost:8080
+{
+  "_links" : {
+    "people" : {
+      "href" : "http://localhost:8080/people{?page,size,sort}",
+      "templated" : true
+    },
+    "profile" : {
+      "href" : "http://localhost:8080/profile"
+    }
+  }
+}
+
+# There is a people link located at http://localhost:8080/people.
+# It has some options such as ?page, ?size, and ?sort.
+
+# Spring Data REST uses the HAL format for JSON output. 
+# It is flexible and offers a convenient way to supply 
+# links adjacent to the data that is served.
+
+$ curl http://localhost:8080/people
+{
+  "_embedded" : {
+    "people" : [ ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/people{?page,size,sort}",
+      "templated" : true
+    },
+    "profile" : {
+      "href" : "http://localhost:8080/profile/people"
+    },
+    "search" : {
+      "href" : "http://localhost:8080/people/search"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 0,
+    "totalPages" : 0,
+    "number" : 0
+  }
+}
+
+# Create new Person
+
+$ curl -i -X POST -H "Content-Type:application/json" -d "{  \"firstName\" : \"Frodo\",  \"lastName\" : \"Baggins\" }" http://localhost:8080/people
+HTTP/1.1 201 
+Location: http://localhost:8080/people/5b9b390dc9fe735474ac5769
+Content-Type: application/hal+json;charset=UTF-8
+Transfer-Encoding: chunked
+Date: Fri, 14 Sep 2018 04:29:02 GMT
+
+{
+  "firstName" : "Martin",
+  "lastName" : "More",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/people/5b9b390dc9fe735474ac5769"
+    },
+    "person" : {
+      "href" : "http://localhost:8080/people/5b9b390dc9fe735474ac5769"
+    }
+  }
+}
+
+# curl http://localhost:8080/people/5b9b390dc9fe735474ac5769
+
+{
+  "firstName" : "Martin",
+  "lastName" : "More",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/people/5b9b390dc9fe735474ac5769"
+    },
+    "person" : {
+      "href" : "http://localhost:8080/people/5b9b390dc9fe735474ac5769"
+    }
+  }
+}
+
+$ curl http://localhost:8080/people/search
+{
+  "_links" : {
+    "findByLastName" : {
+      "href" : "http://localhost:8080/people/search/findByLastName{?name}",
+      "templated" : true
+    }
+  }
+}
+
+$ curl http://localhost:8080/people/search/findByLastName?name=More
+
+{
+  "_embedded" : {
+    "people" : [ {
+      "firstName" : "Martin",
+      "lastName" : "More",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/people/5b9b390dc9fe735474ac5769"
+        },
+        "person" : {
+          "href" : "http://localhost:8080/people/5b9b390dc9fe735474ac5769"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/people/search/findByLastName?name=More"
+    }
+  }
+}
+
+$ curl -X PUT -H "Content-Type:application/json" -d "{ \"firstName\": \"Bilbo\", \"lastName\": \"Baggins\" }" http://localhost:8080/people/53149b8e3004990b1af9f229
+$ curl http://localhost:8080/people/53149b8e3004990b1af9f229
+{
+  "firstName" : "Bilbo",
+  "lastName" : "Baggins",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/people/53149b8e3004990b1af9f229"
+    }
+  }
+}
+
+$ curl -X PATCH -H "Content-Type:application/json" -d "{ \"firstName\": \"Bilbo Jr.\" }" http://localhost:8080/people/53149b8e3004990b1af9f229
+$ curl http://localhost:8080/people/53149b8e3004990b1af9f229
+{
+  "firstName" : "Bilbo Jr.",
+  "lastName" : "Baggins",
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/people/53149b8e3004990b1af9f229"
+    }
+  }
+}
+
+$ curl -X DELETE http://localhost:8080/people/53149b8e3004990b1af9f229
+$ curl http://localhost:8080/people
+{
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/people{?page,size,sort}",
+      "templated" : true
+    },
+    "search" : {
+      "href" : "http://localhost:8080/people/search"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 0,
+    "totalPages" : 0,
+    "number" : 0
+  }
+}
+

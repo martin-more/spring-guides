@@ -1,4 +1,4 @@
-package com.moredev.spring.gsmongodbdatarest.entity;
+package com.moredev.spring.gsmysqldata.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

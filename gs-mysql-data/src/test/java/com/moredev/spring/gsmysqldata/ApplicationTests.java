@@ -1,4 +1,4 @@
-package com.moredev.spring.gsmongodbdatarest;
+package com.moredev.spring.gsmysqldata;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

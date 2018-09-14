@@ -1,0 +1,10 @@
+# Create
+$ curl 'localhost:8080/demo/add?name=First&email=someemail@someemailprovider.com'
+
+# All
+$ curl 'localhost:8080/demo/all'
+
+#-----------------------------
+#		Security Changes	 
+#-----------------------------
+# https://spring.io/guides/gs/accessing-data-mysql/

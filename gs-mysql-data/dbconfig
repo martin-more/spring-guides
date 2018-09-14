@@ -1,0 +1,9 @@
+# Create the database
+# -------------------
+
+$ sudo mysql --password
+
+mysql> create database gs_db_example; -- Create the new database
+mysql> create user 'springuser'@'localhost' identified by 'ThePassword'; -- Creates the user
+mysql> grant all on gs_db_example.* to 'springuser'@'localhost'; -- Gives all the privileges to the new user on the newly created database
+

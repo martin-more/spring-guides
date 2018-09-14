@@ -1,8 +1,8 @@
-package com.moredev.spring.gsmongodbdatarest.repository;
+package com.moredev.spring.gsmysqldata.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.moredev.spring.gsmongodbdatarest.entity.User;
+import com.moredev.spring.gsmysqldata.entity.User;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 

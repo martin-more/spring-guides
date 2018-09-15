@@ -1,0 +1,6 @@
+- http://localhost:8088/greeting
+{"id":1,"content":"Hello, World!"}
+
+- http://localhost:8088/greeting?name=Martin
+{"id":2,"content":"Hello, Martin!"}
+

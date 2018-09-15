@@ -26,18 +26,19 @@
 	</properties>
 
 	<dependencies>
-		
+
 		<!-- Added start -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- Added end -->
-		
+
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<scope>test</scope>
 		</dependency>
+		<!-- Added end -->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
